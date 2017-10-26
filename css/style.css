@@ -1,14 +1,43 @@
 body {
-	background-color: silver;
-	font-family: sans-serif;
+    background-image: url("../img/huis.png");
+    font-family: sans-serif;
+    background-size: 100%;
 }
 
 #level_title {
-	font-size: 18px;
-	color: black;		
-	font-weight: bold;
+    font-size: 18px;
+    color: black;
+    font-weight: bold;
 }
 
-#level_image {
-	height: 500px;
+nav {
+    font-size: 200px;
+}
+
+button {
+    font-size: 200px;
+    background-color: transparent;
+    border-color: transparent;
+}
+#ButtonLeft{
+    position: absolute;
+    left: 0px;
+    bottom: 50%;
+}
+#ButtonRight{
+    position: absolute;
+    right: 0px;
+    bottom: 50%;
+}
+#ButtonUp{
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    vertical-align: middle;
+}
+#ButtonDown{
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    vertical-align: middle;
 }
