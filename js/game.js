@@ -1,12 +1,11 @@
 // javascript library for simple game development
-document.getElementById('level_title').innerHTML = 'Start het spel';
-
-var HasKey = false;
+//Variables
+var HasKeySmall = false;
+var HasKeyBig = false;
 var HasFlashLight = false;
 var HasCard = false;
-var clicked = false;
-var Positionsetter = x + "%" + y + "%";
-var y = 75.5;
+var bugtest = false;
+var y = 100;
 var x = 100;
 var LevelX = 1;
 var LevelY = 1;
@@ -14,178 +13,43 @@ var ButtonUP = document.getElementById('ButtonUp');
 var ButtonRight = document.getElementById('ButtonRight');
 var ButtonLeft = document.getElementById('ButtonLeft');
 var ButtonDown = document.getElementById('ButtonDown');
+var ButtonBLOCKUP = document.getElementById('ButtonBLOCKUP');
+var StartButton = document.getElementById('ButtonStart');
 var LevelXY = 'Level' + LevelX + LevelY;
+var animation = 1;
+var D = 0;
+var Skin = "char";
+var Speed = 50;
+if(bugtest == true){
+  Bugtest();
+}
+
+
+document.getElementById("Char").setAttribute("style", "display: none");
+//Buttons
 ButtonUP.setAttribute("onClick", "MoveUP();");
 ButtonLeft.setAttribute("onClick", "MoveLeft();");
 ButtonDown.setAttribute("onClick", "MoveDown();");
 ButtonRight.setAttribute("onClick", "MoveRight();");
+ButtonBLOCKUP.setAttribute("style", "display: none;");
 
 
-ButtonStart.innerHTML = '&#9889;';
+//Button Styling
 ButtonRight.style.fontSize = '0';
 ButtonUP.style.fontSize = '0';
 ButtonDown.style.fontSize = '0';
 ButtonLeft.style.fontSize = '0';
-function moved() {
-    var LevelXY = 'Level' + LevelX + LevelY;
-    //right
-    if (LevelX == 1) {
-        document.getElementById("ButtonRight").disabled = true;
-    }
-    else{
-        document.getElementById("ButtonRight").disabled = false;
-    }
-    //left
-    if (LevelX == 3) {
 
-        document.getElementById("ButtonLeft").disabled = true;
-    }
-    else{
-        document.getElementById("ButtonLeft").disabled = false;
-    }
-    //Down
-    if (LevelY == 1){
-        document.getElementById("ButtonDown").disabled = true;
-    }
-    else{
-        document.getElementById("ButtonDown").disabled = false;
-    }
-    //UP
-    if (LevelY == 3){
-        document.getElementById("ButtonUp").disabled = true;
-    }
-    else{
-        document.getElementById("ButtonUp").disabled = false;
-    }
-
-    console.log(LevelXY);
-    console.log(LevelX);
-    eval(''+LevelXY+ '()');
-    document.getElementById('level_title').innerHTML = LevelXY;
-    var Positionsetter = x + "%" + y + "%";
-}
-
-function MoveLeft() {
-
-    var a = 0;
-    window.setInterval(frame, 50);
-    console.log("now moving left");
-
-    function frame() {
-
-        if (a == 51) {
-            a++;
-            console.log("Animation finished");
-            console.log(a);
-            LevelX++;
-            moved();
-
-            
-
-        }
-        else if (a < 51) {
-            var Positionsetter = x + "%" + y + "%";
-            a++;
-            x--;
-            document.body.style.backgroundPosition = Positionsetter;
-            console.log(x);
-            console.log(Positionsetter);
-            console.log(a);
-        }
-    }
-}
-
-function MoveRight() {
-
-    var a = 0;
-    window.setInterval(frame, 50);
-    console.log("now moving right");
-
-    function frame() {
-
-        if (a == 51) {
-            LevelX--;
-            a++;
-            console.log("Animation finished");
-            console.log(a);
-            moved();
-        }
-        else if (a < 51) {
-
-            a++;
-            x++;
-            var Positionsetter = x + "%" + y + "%";
-            document.body.style.backgroundPosition = Positionsetter;
-            console.log(x);
-            console.log(Positionsetter);
-            console.log(a);
-        }
-    }
-}
-
-function MoveDown() {
-
-    var a = 0;
-    window.setInterval(frame, 50);
-    console.log("now moving down");
-
-    function frame() {
-
-        if (a == 38) {
-            LevelY--;
-            a++;
-            console.log("Animation finished");
-            console.log(a);
-            moved();
-        }
-        else if (a < 38) {
-            var Positionsetter = x + "%" + y + "%";
-            a++;
-            y++;
-            document.body.style.backgroundPosition = Positionsetter;
-            console.log(x);
-            console.log(Positionsetter);
-            console.log(a);
-        }
-    }
-}
-
-function MoveUP() {
-
-    var a = 0;
-    window.setInterval(frame, 50);
-    console.log("now moving left");
-
-    function frame() {
-
-        if (a == 38) {
-            a++;
-            LevelY++;
-            console.log("Animation finished");
-            console.log(a);
-            moved();
-        }
-        else if (a < 38) {
-            var Positionsetter = x + "%" + y + "%";
-            a++;
-            y--;
-            document.body.style.backgroundPosition = Positionsetter;
-            console.log(x);
-            console.log(Positionsetter);
-            console.log(a);
-        }
-    }
-}
 
 function Start() {
     document.body.style.backgroundImage = "url('img/plan.png')";
-    document.body.style.backgroundSize = "265%";
+    document.body.style.backgroundSize = "300%";
     var Positionsetter = x + "%" + y + "%";
     document.body.style.backgroundPosition = Positionsetter;
-    console.log(Positionsetter);
+    document.getElementById("Char").setAttribute("style", "display: block");
+    StartButton.setAttribute("style", "display: none; background-color: none; border-color: none; ");
     Level11();
     moved();
-    ButtonLeft.innerHTML = '&larr;';
     ButtonRight.style.fontSize = '200px';
     ButtonUP.style.fontSize = '200px';
     ButtonDown.style.fontSize = '200px';
@@ -194,45 +58,299 @@ function Start() {
 
 }
 
-function Level11() {
+function Moving() {
+    if(bugtest == true){
+        document.getElementById('UpRIGHT').innerHTML = "X:" + x + "Y:" + y;
+    }
+    document.getElementById("ButtonRight").disabled = true;
+    document.getElementById("ButtonLeft").disabled = true;
+    document.getElementById("ButtonDown").disabled = true;
+    document.getElementById("ButtonUp").disabled = true;
+    document.getElementById("ButtonMiddle").disabled = true;
+    document.getElementById("ButtonBLOCKUP").disabled = true;
+    document.getElementById("KEY").setAttribute("style", "display: none;");
+    document.getElementById("CHEST").setAttribute("style", "display: none;");
+    document.getElementById("ButtonBLOCKUP").setAttribute("style", "display: none;");
+    var Positionsetter = x + "%" + y + "%";
+    document.body.style.backgroundPosition = Positionsetter;
+    console.log("TEST OM TE LOPEN");
+    console.log(D);
+    if (D == 3) {
+        document.getElementById("Char").src = "img/" + Skin + "2.png";
 
+    }
+    if (D == 6) {
+        document.getElementById("Char").src = "img/" + Skin + "1.png";
+        D = 0;
+    }
+    if (x == 49 && y < 48 && y > 8){
+        document.getElementById("Char").setAttribute("style", "display: none;");
+        console.log("IVINISBLE");
 
+    }
+    else{
+        console.log("visible");
+        document.getElementById("Char").setAttribute("style", "display: block;");
+        if( y < 9){
+            document.getElementById("Char").setAttribute("style", "width: 300px;");
+        }
+        else{
+            document.getElementById("Char").setAttribute("style", "width: 50px;");
+        }
+    }
 
 }
 
-function Level21() {
+function moved() {
+    document.getElementById("Char").setAttribute("style", "display: block;");
+    var LevelXY = 'Level' + LevelX + LevelY;
+    if (LevelX == 1 || LevelY == 2) {
+        document.getElementById("ButtonRight").disabled = true;
+    }
+    else {
+        document.getElementById("ButtonRight").disabled = false;
+    }
+    //left
+    if (LevelX == 3 || LevelY == 2) {
 
+        document.getElementById("ButtonLeft").disabled = true;
+    }
+    else {
+        document.getElementById("ButtonLeft").disabled = false;
+    }
+    //Down
+    if (LevelY == 1 || LevelY == 3 && LevelX != 2) {
+        document.getElementById("ButtonDown").disabled = true;
+    }
+    else {
+        document.getElementById("ButtonDown").disabled = false;
+    }
+    //UP
+    if (LevelY == 3 || LevelY == 2 && LevelX != 2) {
+        document.getElementById("ButtonUp").disabled = true;
+    }
+    else {
+        document.getElementById("ButtonUp").disabled = false;
+    }
+    if( y < 9){
+        document.getElementById("Char").setAttribute("style", "width: 300px;");
+    }
+    else{
+        document.getElementById("Char").setAttribute("style", "width: 50px;");
+    }
+    console.log(x + "+" + y);
+    eval('' + LevelXY + '()');
+    document.getElementById('level_title').innerHTML = LevelXY;
+    document.getElementById("Char").src = "img/"+Skin+".png";
+    var Positionsetter = x + "%" + y + "%";
+    console.log("Animation finished");
+    D = 0;
+}
+
+function MoveLeft() {
+    var a = 0;
+    window.setInterval(frame, Speed);
+    console.log("now moving left");
+
+    function frame() {
+        if (a == 51) {
+            a++;
+
+            LevelX++;
+            moved();
+        }
+        else if (a < 51) {
+            a++;
+            x--;
+            Moving();
+            D++;
+        }
+    }
+
+}
+
+function MoveRight() {
+    var a = 0;
+    window.setInterval(frame, Speed);
+    console.log("now moving right");
+
+    function frame() {
+        if (a == 51) {
+            LevelX--;
+            a++;
+
+            moved();
+        }
+        else if (a < 51) {
+            a++;
+            x++;
+            Moving();
+            D++;
+        }
+
+    }
+
+}
+
+function MoveDown() {
+    var a = 0;
+
+    window.setInterval(frame, Speed);
+    console.log("now moving down");
+
+    function frame() {
+        if (a == 50) {
+
+            LevelY--;
+            a++;
+            moved();
+        }
+        else if (a < 50) {
+            a++;
+            y++;
+            Moving();
+            D++;
+        }
+    }
+
+}
+
+function MoveUP() {
+    var a = 0;
+    window.setInterval(frame, Speed);
+    console.log("now moving up");
+
+    function frame() {
+        if (a == 50) {
+
+            a++;
+            LevelY++;
+            moved();
+        }
+        else if (a < 50) {
+            a++;
+            y--;
+            Moving();
+            D++;
+        }
+
+    }
+}
+
+
+function Level11() {
+}
+
+
+function Level21() {
+    document.getElementById("ButtonBLOCKUP").setAttribute("style", "display: block;");
+    if (HasCard == true) {
+        document.getElementById("ButtonBLOCKUP").setAttribute("style", "display: none;");
+    }
+    else {
+        document.getElementById("ButtonBLOCKUP").onclick = function () {
+            alert("You'll need a keycard to get through here.")
+        }
+    }
 
 }
 
 function Level31() {
-
-    console.log("Level 3!");
+    //searching forest
+    document.getElementById("ButtonMiddle").disabled = false;
+    document.getElementById("ButtonMiddle").innerHTML = 'Search Forest?';
+    document.getElementById("ButtonBLOCKUP").disabled = false;
+    document.getElementById("ButtonBLOCKUP").setAttribute("style", "display: block;");
+    if (HasFlashLight == true) {
+        document.getElementById("ButtonMiddle").onclick = function () {
+            HasKeySmall = true;
+            console.log(HasKeySmall);
+            alert("Recieved SmallKey");
+            document.getElementById("ButtonBLOCKUP").disabled = true;
+            document.getElementById("ButtonBLOCKUP").setAttribute("style", "display: none;");
+        }
+    }
+    else {
+        document.getElementById("ButtonMiddle").onclick = function () {
+            alert("You'll need a FlashLight to search the forest.")
+        }
+    }
+    //Going up
+    if (HasKeySmall == true) {
+        document.getElementById("ButtonBLOCKUP").setAttribute("style", "display: none;");
+        document.getElementById("ButtonBLOCKUP").disabled = true;
+    }
+    else {
+        document.getElementById("ButtonBLOCKUP").onclick = function () {
+            alert("You'll need a Small key to get through here.")
+        }
+    }
 
 
 }
 
 function Level12() {
-    //button stuff
-
+    document.getElementById("ButtonMiddle").disabled = false;
+    document.getElementById("ButtonMiddle").innerHTML = 'Search Shed?';
+    document.getElementById("ButtonMiddle").onclick = function () {
+        alert("Recieved Flashlight!");
+        HasFlashLight = true;
+    };
 
 }
 
 function Level22() {
-    //button stuff
+}
 
+function Level32() {
+    document.getElementById("ButtonMiddle").disabled = false;
+    document.getElementById("ButtonMiddle").innerHTML = 'Search Tower?';
+    document.getElementById("ButtonMiddle").onclick = function () {
+        alert("Recieved keycard!");
+        HasCard = true;
+    };
+}
 
+function Level13() {
+    document.getElementById("CHEST").setAttribute("style", "display: block;");
 
-    //console
-    console.log("Level 3!");
+    document.getElementById("CHEST").onclick = function () {
+        if (HasKeyBig = true) {
+            alert("You picked up a gold armor.");
+            Skin = "CharArmor";
+            document.getElementById("Char").src = "img/"+Skin+".png";
+
+        }
+        else {
+            alert("You will need a key to open this chest.");
+
+        }
+    }
 
 
 }
 
-function Level32() {
-    //console
-    console.log("Level1()");
-    console.log("test()");
+function Level23() {
+    document.getElementById("GATE").setAttribute("style", "display: block;");
+    document.getElementById("GATE").onclick = function () {
+        HasKeyBig = true;
+        alert("Y0 went through gate");
+    }
+}
 
+function Level33() {
+    document.getElementById("KEY").setAttribute("style", "display: block;");
+    document.getElementById("KEY").onclick = function () {
+        HasKeyBig = true;
+        alert("You picked up a treasure key.");
+    }
 
+}
+function Bugtest(){
+    HasKeySmall = true;
+    HasKeyBig = true;
+    HasFlashLight = true;
+    HasCard = true;
+    document.getElementById('UpRIGHT').innerHTML = x + y;
+    Speed = 10;
 }

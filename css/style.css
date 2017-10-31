@@ -1,9 +1,13 @@
 body {
-    background-image: url("../img/huis.png");
+    background-image: url("../img/Menu.png");
+
     font-family: sans-serif;
     background-size: 100%;
+    background-repeat: no-repeat;
+    background-color: #62A243;
+    height:740px;
+    width: 1500px;
 }
-
 #level_title {
     font-size: 18px;
     color: black;
@@ -19,25 +23,109 @@ button {
     background-color: transparent;
     border-color: transparent;
 }
-#ButtonLeft{
+#ButtonStart{
+    font-size: 60px;
+    position: absolute;
+    left: 38%;
+    top: 36%;
+    background-color: yellow;
+    border-color: red;
+    border-radius: 20px;
+}
+
+#ButtonLeft {
     position: absolute;
     left: 0px;
     bottom: 50%;
 }
-#ButtonRight{
+
+#ButtonRight {
     position: absolute;
     right: 0px;
     bottom: 50%;
 }
-#ButtonUp{
+
+#ButtonUp {
     position: absolute;
     top: 0px;
     left: 50%;
     vertical-align: middle;
 }
-#ButtonDown{
+#ButtonBLOCKUP{
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    vertical-align: middle;
+    color: yellow;
+    z-index: 20;
+}
+
+#ButtonDown {
     position: absolute;
     bottom: 0px;
     left: 50%;
     vertical-align: middle;
+}
+
+button:disabled,
+button[disabled] {
+    color: transparent;
+}
+#Char{
+    position: absolute;
+    bottom: 150px;
+    left: 50%;
+    vertical-align: middle;
+
+}
+#ButtonMiddle{
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    font-size: 50px;
+    /*border: solid black;*/
+}
+
+#KEY{
+    display: none;
+    opacity: 100;
+    position:absolute;
+    top: 50%;
+    /*background-color: pink;*/
+    width: 500px;
+    height: 250px;
+
+}
+
+#CHEST{
+    display: none;
+    opacity: 100;
+    position:absolute;
+    top: 15%;
+    left: 25%;
+    /*background-color: pink;*/
+    width: 780px;
+    height: 270px;
+
+}
+
+#GATE{
+    display: none;
+    opacity: 100;
+    position:absolute;
+    top: 0%;
+    left: 25%;
+    /*background-color: pink;*/
+    width: 780px;
+    height: 120px;
+
+}
+
+button:hover{
+    cursor: grab;
+}
+
+button{
+    outline: none;
+    cursor:pointer;
 }
