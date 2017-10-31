@@ -1,31 +1,35 @@
 // javascript library for simple game development
 //Variables
-var HasKeySmall = false;
-var HasKeyBig = false;
-var HasFlashLight = false;
-var HasCard = false;
-var bugtest = false;
-var y = 100;
-var x = 100;
-var LevelX = 1;
-var LevelY = 1;
+var HasKeySmall = false;    //Variable for key for small gate
+var HasKeyBig = false;      //Variable for key for chest
+var HasFlashLight = false; // Variable for Flashlight for Forest
+var HasCard = false;       //Variable for entering the castle with card
+var bugtest = false;       //Bugtesting mode
+var y = 100;               //Horizontal background coördinates
+var x = 100;               //Vertical background coördinates
+var LevelX = 1;            //Horizontal Level
+var LevelY = 1;            //Vertical Level
+// var LevelXY = 'Level' + LevelX + LevelY;   //For Display purposes
+var D = 0;                 //Variable for Animation
+var Skin = "char";         //Player Skin
+var Speed = 50;            //WalkSpeed
+if(bugtest == true){       //Development
+    Bugtest();
+}
+
+//Variables refering to HTML
 var ButtonUP = document.getElementById('ButtonUp');
 var ButtonRight = document.getElementById('ButtonRight');
 var ButtonLeft = document.getElementById('ButtonLeft');
 var ButtonDown = document.getElementById('ButtonDown');
 var ButtonBLOCKUP = document.getElementById('ButtonBLOCKUP');
 var StartButton = document.getElementById('ButtonStart');
-var LevelXY = 'Level' + LevelX + LevelY;
-var animation = 1;
-var D = 0;
-var Skin = "char";
-var Speed = 50;
-if(bugtest == true){
-  Bugtest();
-}
+var Character = document.getElementById("Char");
 
 
-document.getElementById("Char").setAttribute("style", "display: none");
+
+
+
 //Buttons
 ButtonUP.setAttribute("onClick", "MoveUP();");
 ButtonLeft.setAttribute("onClick", "MoveLeft();");
@@ -34,22 +38,24 @@ ButtonRight.setAttribute("onClick", "MoveRight();");
 ButtonBLOCKUP.setAttribute("style", "display: none;");
 
 
-//Button Styling
+//Styling for MENU
+Character.setAttribute("style", "display: none");
 ButtonRight.style.fontSize = '0';
 ButtonUP.style.fontSize = '0';
 ButtonDown.style.fontSize = '0';
 ButtonLeft.style.fontSize = '0';
 
-
+//Main Initializer of the game
 function Start() {
-    document.body.style.backgroundImage = "url('img/plan.png')";
-    document.body.style.backgroundSize = "300%";
-    var Positionsetter = x + "%" + y + "%";
-    document.body.style.backgroundPosition = Positionsetter;
-    document.getElementById("Char").setAttribute("style", "display: block");
-    StartButton.setAttribute("style", "display: none; background-color: none; border-color: none; ");
-    Level11();
-    moved();
+    document.body.style.backgroundImage = "url('img/plan.png')";    //Sets correct background
+    document.body.style.backgroundSize = "300%";                    //Scales game background
+    var Positionsetter = x + "%" + y + "%";                         //Converts position stuff
+    document.body.style.backgroundPosition = Positionsetter;        //Sets correct position
+    Character.setAttribute("style", "display: block");              //Makes Character visible at start of game
+    StartButton.setAttribute("style", "display: none; background-color: none; border-color: none; "); //Hides start button
+    Level11();                                                      //Initiates first level
+    moved();                                                        //Acts as the Character has moved to make sure everything is started
+    //Turns on the correct buttons
     ButtonRight.style.fontSize = '200px';
     ButtonUP.style.fontSize = '200px';
     ButtonDown.style.fontSize = '200px';
@@ -58,123 +64,142 @@ function Start() {
 
 }
 
+// Checks to be done Whilst moving
 function Moving() {
-    if(bugtest == true){
+    //Turns on exact location display
+    if(bugtest == true) {
         document.getElementById('UpRIGHT').innerHTML = "X:" + x + "Y:" + y;
     }
-    document.getElementById("ButtonRight").disabled = true;
-    document.getElementById("ButtonLeft").disabled = true;
-    document.getElementById("ButtonDown").disabled = true;
-    document.getElementById("ButtonUp").disabled = true;
-    document.getElementById("ButtonMiddle").disabled = true;
-    document.getElementById("ButtonBLOCKUP").disabled = true;
+    //Disables buttons
+    ButtonRight.disabled = true;
+    ButtonLeft.disabled = true;
+    ButtonDown.disabled = true;
+    ButtonUP.disabled = true;
+    ButtonMiddle.disabled = true;
+    ButtonBLOCKUP.disabled = true;
+    //Removes area specific stuff
     document.getElementById("KEY").setAttribute("style", "display: none;");
     document.getElementById("CHEST").setAttribute("style", "display: none;");
-    document.getElementById("ButtonBLOCKUP").setAttribute("style", "display: none;");
+    ButtonBLOCKUP.setAttribute("style", "display: none;");
+    //Sets correct position
     var Positionsetter = x + "%" + y + "%";
     document.body.style.backgroundPosition = Positionsetter;
-    console.log("TEST OM TE LOPEN");
-    console.log(D);
+
+    //walking animation
     if (D == 3) {
-        document.getElementById("Char").src = "img/" + Skin + "2.png";
+        Character.src = "img/" + Skin + "2.png";
 
     }
     if (D == 6) {
-        document.getElementById("Char").src = "img/" + Skin + "1.png";
+        Character.src = "img/" + Skin + "1.png";
         D = 0;
     }
+    //Makes character invisible when entering castle
     if (x == 49 && y < 48 && y > 8){
-        document.getElementById("Char").setAttribute("style", "display: none;");
+        Character.setAttribute("style", "display: none;");
         console.log("IVINISBLE");
 
     }
+    //makes Character visible
     else{
         console.log("visible");
-        document.getElementById("Char").setAttribute("style", "display: block;");
+        Character.setAttribute("style", "display: block;");
+        //Makes Character Bigger when in castle
         if( y < 9){
-            document.getElementById("Char").setAttribute("style", "width: 300px;");
+            Character.setAttribute("style", "width: 300px;");
         }
+        //Makes character normal size
         else{
-            document.getElementById("Char").setAttribute("style", "width: 50px;");
+            Character.setAttribute("style", "width: 50px;");
         }
     }
 
 }
-
+//Checks to do after moving
 function moved() {
-    document.getElementById("Char").setAttribute("style", "display: block;");
+    //Re-Enables the character model as safety
+    Character.setAttribute("style", "display: block;");
+    //Used to run the correct function for levels
     var LevelXY = 'Level' + LevelX + LevelY;
+    //Disables buttons when needed
+    //right
     if (LevelX == 1 || LevelY == 2) {
-        document.getElementById("ButtonRight").disabled = true;
+        ButtonRight.disabled = true;
     }
     else {
-        document.getElementById("ButtonRight").disabled = false;
+        ButtonRight.disabled = false;
     }
     //left
     if (LevelX == 3 || LevelY == 2) {
 
-        document.getElementById("ButtonLeft").disabled = true;
+        ButtonLeft.disabled = true;
     }
     else {
-        document.getElementById("ButtonLeft").disabled = false;
+        ButtonLeft.disabled = false;
     }
     //Down
     if (LevelY == 1 || LevelY == 3 && LevelX != 2) {
-        document.getElementById("ButtonDown").disabled = true;
+        ButtonDown.disabled = true;
     }
     else {
-        document.getElementById("ButtonDown").disabled = false;
+        ButtonDown.disabled = false;
     }
     //UP
     if (LevelY == 3 || LevelY == 2 && LevelX != 2) {
-        document.getElementById("ButtonUp").disabled = true;
+        ButtonUP.disabled = true;
     }
     else {
-        document.getElementById("ButtonUp").disabled = false;
+        ButtonUP.disabled = false;
     }
+    //Sets width of character
     if( y < 9){
-        document.getElementById("Char").setAttribute("style", "width: 300px;");
+        Character.setAttribute("style", "width: 300px;");
+        // in castle
     }
     else{
-        document.getElementById("Char").setAttribute("style", "width: 50px;");
+        Character.setAttribute("style", "width: 50px;")
+        // outside
     }
-    console.log(x + "+" + y);
-    eval('' + LevelXY + '()');
-    document.getElementById('level_title').innerHTML = LevelXY;
-    document.getElementById("Char").src = "img/"+Skin+".png";
-    var Positionsetter = x + "%" + y + "%";
-    console.log("Animation finished");
-    D = 0;
+    console.log(x + "+" + y);           //logs level
+    eval('' + LevelXY + '()');          //Runs correct function
+    document.getElementById('level_title').innerHTML = LevelXY;    //sets Topleft TXT
+    Character.src = "img/"+Skin+".png";  //sets correct skin
+    console.log("Animation finished");  //notifies console of animation beind finished
+    D = 0;                              //resets animation
 }
 
+//Function for moving left
 function MoveLeft() {
-    var a = 0;
-    window.setInterval(frame, Speed);
-    console.log("now moving left");
+    var a = 0;                               //Resets timer
+    window.setInterval(movement, Speed);        //Sets correct speed to move at
+    console.log("now moving left");          //Tells console which way moving
 
-    function frame() {
+    //Movement loop
+    function movement() {
+        //Final movement
         if (a == 51) {
-            a++;
+            a++;    //Adds to loop
 
-            LevelX++;
-            moved();
+            LevelX++; //Changes LVL
+            moved();  //Sets everything back to how it should be
         }
+        //moving
         else if (a < 51) {
-            a++;
-            x--;
-            Moving();
-            D++;
+            a++;        //Adds to loop counter
+            x--;        //Moves map
+            Moving();   //Executes code used everywhere whilst moving
+            D++;    //Executes animation
         }
     }
 
 }
-
+//Function for moving Right, practicly the same as the Left
 function MoveRight() {
     var a = 0;
-    window.setInterval(frame, Speed);
+    window.setInterval(movement, Speed);
     console.log("now moving right");
 
-    function frame() {
+    function movement() {
         if (a == 51) {
             LevelX--;
             a++;
@@ -191,14 +216,14 @@ function MoveRight() {
     }
 
 }
-
+//Function for moving Down, practicly the same as the Left
 function MoveDown() {
     var a = 0;
 
-    window.setInterval(frame, Speed);
+    window.setInterval(movement, Speed);
     console.log("now moving down");
 
-    function frame() {
+    function movement() {
         if (a == 50) {
 
             LevelY--;
@@ -214,13 +239,13 @@ function MoveDown() {
     }
 
 }
-
+//Function for moving UP, practicly the same as the Left
 function MoveUP() {
     var a = 0;
-    window.setInterval(frame, Speed);
+    window.setInterval(movement, Speed);
     console.log("now moving up");
 
-    function frame() {
+    function movement() {
         if (a == 50) {
 
             a++;
@@ -243,12 +268,16 @@ function Level11() {
 
 
 function Level21() {
-    document.getElementById("ButtonBLOCKUP").setAttribute("style", "display: block;");
+    //Middle level
+    ButtonBLOCKUP.setAttribute("style", "display: block;"); //Disables going up
+    //Checks for keycard
     if (HasCard == true) {
-        document.getElementById("ButtonBLOCKUP").setAttribute("style", "display: none;");
+        //If you have the keycard, Remove the block
+        ButtonBLOCKUP.setAttribute("style", "display: none;");
     }
     else {
-        document.getElementById("ButtonBLOCKUP").onclick = function () {
+        ButtonBLOCKUP.onclick = function () {
+            //If not, alert the player in a popup when the block is clicked
             alert("You'll need a keycard to get through here.")
         }
     }
@@ -257,31 +286,31 @@ function Level21() {
 
 function Level31() {
     //searching forest
-    document.getElementById("ButtonMiddle").disabled = false;
-    document.getElementById("ButtonMiddle").innerHTML = 'Search Forest?';
-    document.getElementById("ButtonBLOCKUP").disabled = false;
-    document.getElementById("ButtonBLOCKUP").setAttribute("style", "display: block;");
+    ButtonMiddle.disabled = false;
+    ButtonMiddle.innerHTML = 'Search Forest?';
+    ButtonBLOCKUP.disabled = false;
+    ButtonBLOCKUP.setAttribute("style", "display: block;");
     if (HasFlashLight == true) {
-        document.getElementById("ButtonMiddle").onclick = function () {
+        ButtonMiddle.onclick = function () {
             HasKeySmall = true;
             console.log(HasKeySmall);
             alert("Recieved SmallKey");
-            document.getElementById("ButtonBLOCKUP").disabled = true;
-            document.getElementById("ButtonBLOCKUP").setAttribute("style", "display: none;");
+            ButtonBLOCKUP.disabled = true;
+            ButtonBLOCKUP.setAttribute("style", "display: none;");
         }
     }
     else {
-        document.getElementById("ButtonMiddle").onclick = function () {
+        ButtonMiddle.onclick = function () {
             alert("You'll need a FlashLight to search the forest.")
         }
     }
     //Going up
     if (HasKeySmall == true) {
-        document.getElementById("ButtonBLOCKUP").setAttribute("style", "display: none;");
-        document.getElementById("ButtonBLOCKUP").disabled = true;
+        ButtonBLOCKUP.setAttribute("style", "display: none;");
+        ButtonBLOCKUP.disabled = true;
     }
     else {
-        document.getElementById("ButtonBLOCKUP").onclick = function () {
+        ButtonBLOCKUP.onclick = function () {
             alert("You'll need a Small key to get through here.")
         }
     }
@@ -290,9 +319,9 @@ function Level31() {
 }
 
 function Level12() {
-    document.getElementById("ButtonMiddle").disabled = false;
-    document.getElementById("ButtonMiddle").innerHTML = 'Search Shed?';
-    document.getElementById("ButtonMiddle").onclick = function () {
+    ButtonMiddle.disabled = false;
+    ButtonMiddle.innerHTML = 'Search Shed?';
+    ButtonMiddle.onclick = function () {
         alert("Recieved Flashlight!");
         HasFlashLight = true;
     };
@@ -303,9 +332,9 @@ function Level22() {
 }
 
 function Level32() {
-    document.getElementById("ButtonMiddle").disabled = false;
-    document.getElementById("ButtonMiddle").innerHTML = 'Search Tower?';
-    document.getElementById("ButtonMiddle").onclick = function () {
+    ButtonMiddle.disabled = false;
+    ButtonMiddle.innerHTML = 'Search Tower?';
+    ButtonMiddle.onclick = function () {
         alert("Recieved keycard!");
         HasCard = true;
     };
@@ -318,7 +347,7 @@ function Level13() {
         if (HasKeyBig = true) {
             alert("You picked up a gold armor.");
             Skin = "CharArmor";
-            document.getElementById("Char").src = "img/"+Skin+".png";
+            Character.src = "img/"+Skin+".png";
 
         }
         else {
