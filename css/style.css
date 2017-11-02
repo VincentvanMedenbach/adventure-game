@@ -8,6 +8,7 @@ body {
     height:740px;
     width: 1500px;
 }
+
 #level_title {
     font-size: 18px;
     color: black;
@@ -23,6 +24,7 @@ button {
     background-color: transparent;
     border-color: transparent;
 }
+
 #ButtonStart{
     font-size: 60px;
     position: absolute;
@@ -51,6 +53,7 @@ button {
     left: 50%;
     vertical-align: middle;
 }
+
 #ButtonBLOCKUP{
     position: absolute;
     top: 0px;
@@ -71,13 +74,16 @@ button:disabled,
 button[disabled] {
     color: transparent;
 }
+
 #Char{
     position: absolute;
     bottom: 150px;
     left: 50%;
     vertical-align: middle;
+    z-index: 4;
 
 }
+
 #ButtonMiddle{
     position: absolute;
     top: 40%;
@@ -128,4 +134,13 @@ button:hover{
 button{
     outline: none;
     cursor:pointer;
+}
+
+#Draak{
+    display:none;
+    position: absolute;
+    right: 5%;
+    width: 1000px;
+    bottom: 10%;
+    z-index: 5;
 }

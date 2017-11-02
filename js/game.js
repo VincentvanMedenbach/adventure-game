@@ -4,7 +4,7 @@ var HasKeySmall = false;    //Variable for key for small gate
 var HasKeyBig = false;      //Variable for key for chest
 var HasFlashLight = false; // Variable for Flashlight for Forest
 var HasCard = false;       //Variable for entering the castle with card
-var bugtest = false;       //Bugtesting mode
+var bugtest = true;       //Bugtesting mode
 var y = 100;               //Horizontal background coördinates
 var x = 100;               //Vertical background coördinates
 var LevelX = 1;            //Horizontal Level
@@ -13,18 +13,20 @@ var LevelY = 1;            //Vertical Level
 var D = 0;                 //Variable for Animation
 var Skin = "char";         //Player Skin
 var Speed = 50;            //WalkSpeed
+var BossBattle = false;        //Disables BossBattle Stuff
 if(bugtest == true){       //Development
     Bugtest();
 }
 
 //Variables refering to HTML
-var ButtonUP = document.getElementById('ButtonUp');
+var ButtonUP = document.getElementById("ButtonUp");
 var ButtonRight = document.getElementById('ButtonRight');
 var ButtonLeft = document.getElementById('ButtonLeft');
 var ButtonDown = document.getElementById('ButtonDown');
 var ButtonBLOCKUP = document.getElementById('ButtonBLOCKUP');
 var StartButton = document.getElementById('ButtonStart');
 var Character = document.getElementById("Char");
+var Draak = document.getElementById("Draak");
 
 
 
@@ -86,7 +88,7 @@ function Moving() {
     document.body.style.backgroundPosition = Positionsetter;
 
     //walking animation
-    if (D == 3) {
+    if (D > 1) {
         Character.src = "img/" + Skin + "2.png";
 
     }
@@ -97,7 +99,6 @@ function Moving() {
     //Makes character invisible when entering castle
     if (x == 49 && y < 48 && y > 8){
         Character.setAttribute("style", "display: none;");
-        console.log("IVINISBLE");
 
     }
     //makes Character visible
@@ -105,7 +106,7 @@ function Moving() {
         console.log("visible");
         Character.setAttribute("style", "display: block;");
         //Makes Character Bigger when in castle
-        if( y < 9){
+        if( y < 9 || BossBattle == true){
             Character.setAttribute("style", "width: 300px;");
         }
         //Makes character normal size
@@ -115,6 +116,7 @@ function Moving() {
     }
 
 }
+
 //Checks to do after moving
 function moved() {
     //Re-Enables the character model as safety
@@ -157,7 +159,7 @@ function moved() {
         // in castle
     }
     else{
-        Character.setAttribute("style", "width: 50px;")
+        Character.setAttribute("style", "width: 50px;");
         // outside
     }
     console.log(x + "+" + y);           //logs level
@@ -193,6 +195,7 @@ function MoveLeft() {
     }
 
 }
+
 //Function for moving Right, practicly the same as the Left
 function MoveRight() {
     var a = 0;
@@ -216,6 +219,7 @@ function MoveRight() {
     }
 
 }
+
 //Function for moving Down, practicly the same as the Left
 function MoveDown() {
     var a = 0;
@@ -239,6 +243,7 @@ function MoveDown() {
     }
 
 }
+
 //Function for moving UP, practicly the same as the Left
 function MoveUP() {
     var a = 0;
@@ -262,10 +267,8 @@ function MoveUP() {
     }
 }
 
-
 function Level11() {
 }
-
 
 function Level21() {
     //Middle level
@@ -362,8 +365,8 @@ function Level13() {
 function Level23() {
     document.getElementById("GATE").setAttribute("style", "display: block;");
     document.getElementById("GATE").onclick = function () {
-        HasKeyBig = true;
-        alert("Y0 went through gate");
+        BossBattle = true;
+        StartBossBattle();
     }
 }
 
@@ -375,6 +378,7 @@ function Level33() {
     }
 
 }
+
 function Bugtest(){
     HasKeySmall = true;
     HasKeyBig = true;
@@ -383,3 +387,5 @@ function Bugtest(){
     document.getElementById('UpRIGHT').innerHTML = x + y;
     Speed = 10;
 }
+
+
