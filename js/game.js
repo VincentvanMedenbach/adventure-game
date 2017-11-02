@@ -9,12 +9,11 @@ var y = 100;               //Horizontal background coördinates
 var x = 100;               //Vertical background coördinates
 var LevelX = 1;            //Horizontal Level
 var LevelY = 1;            //Vertical Level
-// var LevelXY = 'Level' + LevelX + LevelY;   //For Display purposes
 var D = 0;                 //Variable for Animation
 var Skin = "char";         //Player Skin
 var Speed = 50;            //WalkSpeed
 var BossBattle = false;        //Disables BossBattle Stuff
-if(bugtest == true){       //Development
+if (bugtest == true) {       //Development
     Bugtest();
 }
 
@@ -29,7 +28,6 @@ var Character = document.getElementById("Char");
 var Draak = document.getElementById("Draak");
 
 // window.resizeTo(190, 99);
-
 
 
 //Buttons
@@ -69,7 +67,7 @@ function Start() {
 // Checks to be done Whilst moving
 function Moving() {
     //Turns on exact location display
-    if(bugtest == true) {
+    if (bugtest == true) {
         document.getElementById('UpRIGHT').innerHTML = "X:" + x + "Y:" + y;
     }
     //Disables buttons
@@ -98,21 +96,21 @@ function Moving() {
         D = 0;
     }
     //Makes character invisible when entering castle
-    if (x == 49 && y < 48 && y > 7){
+    if (x == 49 && y < 48 && y > 7) {
         Character.setAttribute("style", "display: none;");
 
     }
     //makes Character visible
-    else{
+    else {
         console.log("visible");
         Character.setAttribute("style", "display: block;");
         //Makes Character Bigger when in castle
-        if( y < 9 || BossBattle == true){
+        if (y < 9 || BossBattle == true) {
             Character.setAttribute("style", "width: 300px;");
             Character.style.top = "300px";
         }
         //Makes character normal size
-        else{
+        else {
             Character.setAttribute("style", "width: 50px;");
             Character.style.top = "550px";
         }
@@ -157,12 +155,12 @@ function moved() {
         ButtonUP.disabled = false;
     }
     //Sets width of character
-    if( y < 9){
+    if (y < 9) {
         Character.setAttribute("style", "width: 300px;");
         Character.style.top = "300px";
         // in castle
     }
-    else{
+    else {
         Character.setAttribute("style", "width: 50px;");
         Character.style.top = "550px";
         // outside
@@ -170,7 +168,7 @@ function moved() {
     console.log(x + "+" + y);           //logs level
     eval('' + LevelXY + '()');          //Runs correct function
     document.getElementById('level_title').innerHTML = LevelXY;    //sets Topleft TXT
-    Character.src = "img/"+Skin+".png";  //sets correct skin
+    Character.src = "img/" + Skin + ".png";  //sets correct skin
     console.log("Animation finished");  //notifies console of animation beind finished
     D = 0;                              //resets animation
 }
@@ -339,7 +337,7 @@ function Level12() {
 function Level22() {
 }
 
-function Level32() {
+ function Level32() {
     ButtonMiddle.disabled = false;
     ButtonMiddle.innerHTML = 'Search Tower?';
     ButtonMiddle.onclick = function () {
@@ -355,7 +353,7 @@ function Level13() {
         if (HasKeyBig = true) {
             alert("You picked up a gold armor.");
             Skin = "CharArmor";
-            Character.src = "img/"+Skin+".png";
+            Character.src = "img/" + Skin + ".png";
 
         }
         else {
@@ -384,7 +382,7 @@ function Level33() {
 
 }
 
-function Bugtest(){
+function Bugtest() {
     HasKeySmall = true;
     HasKeyBig = true;
     HasFlashLight = true;
@@ -392,5 +390,3 @@ function Bugtest(){
     document.getElementById('UpRIGHT').innerHTML = x + y;
     Speed = 10;
 }
-
-

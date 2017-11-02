@@ -1,11 +1,19 @@
+html {
+    background-image: url("../img/Background.png");
+    background-size: 1600px 800px;
+    background-repeat: no-repeat;
+
+}
+
 body {
     background-image: url("../img/Menu.png");
 
     font-family: sans-serif;
     background-width: 1500px;
     background-size: 100%;
-    background-color: #62A243;
-    height:740px;
+    background-repeat: no-repeat;
+
+    height: 740px;
     width: 1500px;
 }
 
@@ -25,7 +33,7 @@ button {
     border-color: transparent;
 }
 
-#ButtonStart{
+#ButtonStart {
     font-size: 60px;
     position: absolute;
     left: 38%;
@@ -54,7 +62,7 @@ button {
     vertical-align: middle;
 }
 
-#ButtonBLOCKUP{
+#ButtonBLOCKUP {
     position: absolute;
     top: 0px;
     left: 50%;
@@ -75,7 +83,7 @@ button[disabled] {
     color: transparent;
 }
 
-#Char{
+#Char {
     position: absolute;
     top: 550px;
     left: 50%;
@@ -84,7 +92,7 @@ button[disabled] {
 
 }
 
-#ButtonMiddle{
+#ButtonMiddle {
     position: absolute;
     top: 40%;
     left: 40%;
@@ -92,10 +100,10 @@ button[disabled] {
     /*border: solid black;*/
 }
 
-#KEY{
+#KEY {
     display: none;
     opacity: 100;
-    position:absolute;
+    position: absolute;
     top: 50%;
     /*background-color: pink;*/
     width: 500px;
@@ -103,10 +111,10 @@ button[disabled] {
 
 }
 
-#CHEST{
+#CHEST {
     display: none;
     opacity: 100;
-    position:absolute;
+    position: absolute;
     top: 15%;
     left: 25%;
     /*background-color: pink;*/
@@ -115,10 +123,10 @@ button[disabled] {
 
 }
 
-#GATE{
+#GATE {
     display: none;
     opacity: 100;
-    position:absolute;
+    position: absolute;
     top: 0%;
     left: 25%;
     /*background-color: pink;*/
@@ -127,17 +135,17 @@ button[disabled] {
 
 }
 
-button:hover{
+button:hover {
     cursor: grab;
 }
 
-button{
+button {
     outline: none;
-    cursor:pointer;
+    cursor: pointer;
 }
 
-#Draak{
-    display:none;
+#Draak {
+    display: none;
     position: absolute;
     right: 5%;
     width: 1000px;

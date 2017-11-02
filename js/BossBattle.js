@@ -11,16 +11,21 @@ var YC = 430;
 var PositionChar = "left:" + XC + "px;top:" + YC + "px;" + "width: 300px;";
 
 function StartBossBattle() {
-    var CurrentSkin = document.getElementById("Char").src;
-    console.log("Bossbattle has started!");
+    console.log("You have encountered a dragon");
     document.body.style.backgroundImage = "url('img/BossBattleBG.png')";    //Sets correct background
-    document.body.style.backgroundSize = "100%";
+    document.body.style.backgroundSize = "100%";                        //Sets correct background scale
+
+    //Removing Buttons
     ButtonRight.style.fontSize = '0';
     ButtonUP.style.fontSize = '0';
     ButtonDown.style.fontSize = '0';
     ButtonLeft.style.fontSize = '0';
+
+    //Setting Character's properly
     Draak.setAttribute("style", "display: block");
     Character.setAttribute("style", PositionChar);
+
+    //UpRight checker
     document.getElementById('UpRIGHT').innerHTML = "X" + XC + "y" + YC;
 
     window.onkeydown = function (KEY) {
@@ -42,7 +47,7 @@ function StartBossBattle() {
             DraakATTACK();
         }
         walking();
-    };
+    };   //Keypress listener
 
 
     window.onkeyup = function (KEY) {
@@ -52,7 +57,7 @@ function StartBossBattle() {
         else if (KEYCODE === 38) Keysup = false;
         else if (KEYCODE === 39) Keysright = false;
         else if (KEYCODE === 40) Keysdown = false;
-    };
+    };    //Keypress listener deactivator
 
     function walking() {
         SpeedChar = 20;
@@ -84,7 +89,7 @@ function StartBossBattle() {
             MovingCHAR();
         }
 
-    }
+    }            //Making the character move when key is pressed
 
 
     function MovingCHAR() {
@@ -111,7 +116,7 @@ function StartBossBattle() {
         var PositionChar = "left:" + XC + "px;top:" + YC + "px;" + "width: 300px;";
         Character.setAttribute("style", PositionChar);
         document.getElementById('UpRIGHT').innerHTML = "X" + XC + "y" + YC;
-    }
+    }         //Stuff to do whilst moving
 
     function DraakATTACK() {
         console.log(Skin);
@@ -127,6 +132,6 @@ function StartBossBattle() {
             StartButton.innerHTML = "You lost.";
             StartButton.setAttribute("style", "display: block; top: 20%;");
         }
-    }
+    }       //When attacking the dragon what to do
 
 }
