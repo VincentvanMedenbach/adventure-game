@@ -2,8 +2,8 @@ body {
     background-image: url("../img/Menu.png");
 
     font-family: sans-serif;
+    background-width: 1500px;
     background-size: 100%;
-    background-repeat: no-repeat;
     background-color: #62A243;
     height:740px;
     width: 1500px;
@@ -38,13 +38,13 @@ button {
 #ButtonLeft {
     position: absolute;
     left: 0px;
-    bottom: 50%;
+    top: 370px;
 }
 
 #ButtonRight {
     position: absolute;
     right: 0px;
-    bottom: 50%;
+    top: 370px;
 }
 
 #ButtonUp {
@@ -77,7 +77,7 @@ button[disabled] {
 
 #Char{
     position: absolute;
-    bottom: 150px;
+    top: 550px;
     left: 50%;
     vertical-align: middle;
     z-index: 4;

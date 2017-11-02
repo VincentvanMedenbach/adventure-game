@@ -4,6 +4,8 @@ var Keysright = false;
 var Keysdown = false;
 var AttackKey = false;
 var movement = 5;
+var WalkingAllowed = true;
+var WalkingBlock = true;
 var XC = 200;
 var YC = 430;
 var PositionChar = "left:" + XC + "px;top:" + YC + "px;" + "width: 300px;";
@@ -19,7 +21,7 @@ function StartBossBattle() {
     ButtonLeft.style.fontSize = '0';
     Draak.setAttribute("style", "display: block");
     Character.setAttribute("style", PositionChar);
-    document.getElementById('UpRIGHT').innerHTML = "X" +XC+"y"+YC;
+    document.getElementById('UpRIGHT').innerHTML = "X" + XC + "y" + YC;
 
     window.onkeydown = function (KEY) {
         var KEYCODE = KEY.keyCode;
@@ -58,23 +60,23 @@ function StartBossBattle() {
 
         function keyz() {
             console.log("walking");
-            if (Keysup) {
+            if (Keysup && WalkingAllowed == true) {
                 console.log("KEYUPPRESSED");
                 YC -= movement;
                 D++;
             }
-            if (Keysdown) {
+            if (Keysdown && WalkingAllowed == true) {
                 YC += movement;
                 console.log("KEYDOWNPRESSED");
                 D++;
             }
 
-            if (Keysleft) {
+            if (Keysleft && WalkingAllowed == true) {
                 XC -= movement;
                 console.log("KEYLEFTPRESSED");
                 D++;
             }
-            if (Keysright) {
+            if (Keysright && WalkingAllowed == true) {
                 XC += movement;
                 D++;
                 console.log("KEYRightPRESSED");
@@ -86,37 +88,44 @@ function StartBossBattle() {
 
 
     function MovingCHAR() {
-        while(YC > 450){
+        while (YC > 450) {
             YC--;
         }
-        while(YC < 215){
+        while (YC < 215) {
             YC++;
         }
-        while(XC < -20){
+        while (XC < -20) {
             XC++;
         }
-        while(XC > 580){
+        while (XC > 580 && WalkingBlock == true) {
             XC--;
         }
-        if (D > 7) {
+        if (D > 7 && WalkingAllowed == true) {
             Character.src = "img/" + Skin + "2.png";
 
         }
-        if (D > 15) {
+        if (D > 15 && WalkingAllowed == true) {
             Character.src = "img/" + Skin + "1.png";
             D = 0;
         }
         var PositionChar = "left:" + XC + "px;top:" + YC + "px;" + "width: 300px;";
         Character.setAttribute("style", PositionChar);
-        document.getElementById('UpRIGHT').innerHTML = "X" +XC+"y"+YC;
+        document.getElementById('UpRIGHT').innerHTML = "X" + XC + "y" + YC;
     }
-    function DraakATTACK(){
+
+    function DraakATTACK() {
         console.log(Skin);
-        if(Skin == "CharArmor" ){
+        if (Skin == "CharArmor") {
             console.log("You won.");
+            Draak.src = "";
+            WalkingBlock = false;
         }
-        else{
-        Draak.src = "img/Dragon1.png";
+        else {
+            WalkingAllowed = false;
+            Character.src = "img/" + Skin + "Dead.png";
+            Draak.src = "img/Dragon1.png";
+            StartButton.innerHTML = "You lost.";
+            StartButton.setAttribute("style", "display: block; top: 20%;");
         }
     }
 

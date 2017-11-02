@@ -28,7 +28,7 @@ var StartButton = document.getElementById('ButtonStart');
 var Character = document.getElementById("Char");
 var Draak = document.getElementById("Draak");
 
-
+// window.resizeTo(190, 99);
 
 
 
@@ -82,6 +82,7 @@ function Moving() {
     //Removes area specific stuff
     document.getElementById("KEY").setAttribute("style", "display: none;");
     document.getElementById("CHEST").setAttribute("style", "display: none;");
+    document.getElementById("GATE").setAttribute("style", "display: none;");
     ButtonBLOCKUP.setAttribute("style", "display: none;");
     //Sets correct position
     var Positionsetter = x + "%" + y + "%";
@@ -97,7 +98,7 @@ function Moving() {
         D = 0;
     }
     //Makes character invisible when entering castle
-    if (x == 49 && y < 48 && y > 8){
+    if (x == 49 && y < 48 && y > 7){
         Character.setAttribute("style", "display: none;");
 
     }
@@ -108,10 +109,12 @@ function Moving() {
         //Makes Character Bigger when in castle
         if( y < 9 || BossBattle == true){
             Character.setAttribute("style", "width: 300px;");
+            Character.style.top = "300px";
         }
         //Makes character normal size
         else{
             Character.setAttribute("style", "width: 50px;");
+            Character.style.top = "550px";
         }
     }
 
@@ -156,10 +159,12 @@ function moved() {
     //Sets width of character
     if( y < 9){
         Character.setAttribute("style", "width: 300px;");
+        Character.style.top = "300px";
         // in castle
     }
     else{
         Character.setAttribute("style", "width: 50px;");
+        Character.style.top = "550px";
         // outside
     }
     console.log(x + "+" + y);           //logs level
