@@ -1,13 +1,11 @@
 html {
-    background-image: url("../img/Background.png");
-    background-size: 1600px 800px;
-    background-repeat: no-repeat;
+    background-color: black;
+
 
 }
 
 body {
     background-image: url("../img/Menu.png");
-
     font-family: sans-serif;
     background-width: 1500px;
     background-size: 100%;
@@ -41,6 +39,7 @@ button {
     background-color: yellow;
     border-color: red;
     border-radius: 20px;
+    z-index: 800;
 }
 
 #ButtonLeft {

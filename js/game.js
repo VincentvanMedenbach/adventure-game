@@ -13,9 +13,7 @@ var D = 0;                 //Variable for Animation
 var Skin = "char";         //Player Skin
 var Speed = 50;            //WalkSpeed
 var BossBattle = false;        //Disables BossBattle Stuff
-if (bugtest == true) {       //Development
-    Bugtest();
-}
+
 
 //Variables refering to HTML
 var ButtonUP = document.getElementById("ButtonUp");
@@ -47,7 +45,30 @@ ButtonLeft.style.fontSize = '0';
 
 //Main Initializer of the game
 function Start() {
-    document.body.style.backgroundImage = "url('img/plan.png')";    //Sets correct background
+    //Reset VAR
+    HasKeySmall == false;    //Variable for key for small gate
+    HasKeyBig == false;      //Variable for key for chest
+    HasFlashLight == false; // Variable for Flashlight for Forest
+    HasCard == false;       //Variable for entering the castle with card
+    bugtest == true;       //Bugtesting mode
+    y = 100;               //Horizontal background coördinates
+    x = 100;               //Vertical background coördinates
+    LevelX = 1;            //Horizontal Level
+    LevelY = 1;            //Vertical Level
+    D = 0;                 //Variable for Animation
+    Skin = "char";         //Player Skin
+    Speed = 50;            //WalkSpeed
+    BossBattle = false;
+    if (bugtest == true) {       //Development
+        Bugtest();
+    }
+    //Reset VAR
+
+    //Reset IMG
+    Draak.setAttribute("style", "display: none");
+    Draak.src = "img/Dragon.png";
+    //Reset IMG
+    document.body.style.backgroundImage = "url('img/Map.png')";    //Sets correct background
     document.body.style.backgroundSize = "300%";                    //Scales game background
     var Positionsetter = x + "%" + y + "%";                         //Converts position stuff
     document.body.style.backgroundPosition = Positionsetter;        //Sets correct position
@@ -61,6 +82,7 @@ function Start() {
     ButtonDown.style.fontSize = '200px';
     ButtonLeft.style.fontSize = '200px';
     ButtonStart.style.fontSize = "0";
+
 
 }
 
@@ -88,11 +110,11 @@ function Moving() {
 
     //walking animation
     if (D > 1) {
-        Character.src = "img/" + Skin + "2.png";
+        Character.src = "img/Char/" + Skin + "2.png";
 
     }
     if (D == 6) {
-        Character.src = "img/" + Skin + "1.png";
+        Character.src = "img/Char/" + Skin + "1.png";
         D = 0;
     }
     //Makes character invisible when entering castle
@@ -168,7 +190,7 @@ function moved() {
     console.log(x + "+" + y);           //logs level
     eval('' + LevelXY + '()');          //Runs correct function
     document.getElementById('level_title').innerHTML = LevelXY;    //sets Topleft TXT
-    Character.src = "img/" + Skin + ".png";  //sets correct skin
+    Character.src = "img/Char/" + Skin + ".png";  //sets correct skin
     console.log("Animation finished");  //notifies console of animation beind finished
     D = 0;                              //resets animation
 }
@@ -353,7 +375,7 @@ function Level13() {
         if (HasKeyBig = true) {
             alert("You picked up a gold armor.");
             Skin = "CharArmor";
-            Character.src = "img/" + Skin + ".png";
+            Character.src = "img/Char/" + Skin + ".png";
 
         }
         else {

@@ -3,6 +3,7 @@ var Keysup = false;
 var Keysright = false;
 var Keysdown = false;
 var AttackKey = false;
+var Attacked = false;
 var movement = 5;
 var WalkingAllowed = true;
 var WalkingBlock = true;
@@ -106,11 +107,11 @@ function StartBossBattle() {
             XC--;
         }
         if (D > 7 && WalkingAllowed == true) {
-            Character.src = "img/" + Skin + "2.png";
+            Character.src = "img/Char/" + Skin + "2.png";
 
         }
         if (D > 15 && WalkingAllowed == true) {
-            Character.src = "img/" + Skin + "1.png";
+            Character.src = "img/Char/" + Skin + "1.png";
             D = 0;
         }
         var PositionChar = "left:" + XC + "px;top:" + YC + "px;" + "width: 300px;";
@@ -120,18 +121,50 @@ function StartBossBattle() {
 
     function DraakATTACK() {
         console.log(Skin);
-        if (Skin == "CharArmor") {
+        if (Skin == "CharArmor" && Attacked == false) {
+            WalkingAllowed = false;
+            Attacked = true;
+            SwordAttack();
+            Character.src = "img/Sword/Animation1.png";
             console.log("You won.");
-            Draak.src = "";
-            WalkingBlock = false;
+
+
         }
         else {
             WalkingAllowed = false;
-            Character.src = "img/" + Skin + "Dead.png";
+            Character.src = "img/Char" + Skin + "Dead.png";
             Draak.src = "img/Dragon1.png";
             StartButton.innerHTML = "You lost.";
             StartButton.setAttribute("style", "display: block; top: 20%;");
         }
-    }       //When attacking the dragon what to do
+    }
 
+}
+
+function SwordAttack(){
+    var a = 0;
+    window.setInterval(Attacking, 20);
+    console.log("Now attacking Dragon!");
+
+    function Attacking() {
+        if (a == 51){
+            Draak.src = "";
+            Draak.alt = "";
+            WalkingAllowed = true;
+            WalkingBlock = false;
+        }
+        else if (a == 50) {
+            a++;
+            Character.src = "img/Sword/Animation3.png";
+        }
+        else if (a < 20) {
+            a++;
+            Character.src = "img/Sword/Animation1.png";
+        }
+        else if (a > 19 && a < 50){
+            a++;
+            Character.src = "img/Sword/Animation2.png";
+        }
+
+    }
 }
