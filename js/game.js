@@ -11,7 +11,7 @@ var LevelX = 1;            //Horizontal Level
 var LevelY = 1;            //Vertical Level
 var D = 0;                 //Variable for Animation
 var Skin = "char";         //Player Skin
-var Speed = 50;            //WalkSpeed
+var Speed = 10;            //WalkSpeed
 var BossBattle = false;        //Disables BossBattle Stuff
 
 
@@ -24,7 +24,7 @@ var ButtonBLOCKUP = document.getElementById('ButtonBLOCKUP');
 var StartButton = document.getElementById('ButtonStart');
 var Character = document.getElementById("Char");
 var Draak = document.getElementById("Draak");
-
+var ButtonMiddle = document.getElementById('ButtonMiddle');
 // window.resizeTo(190, 99);
 
 
@@ -46,19 +46,20 @@ ButtonLeft.style.fontSize = '0';
 //Main Initializer of the game
 function Start() {
     //Reset VAR
-    HasKeySmall == false;    //Variable for key for small gate
-    HasKeyBig == false;      //Variable for key for chest
-    HasFlashLight == false; // Variable for Flashlight for Forest
-    HasCard == false;       //Variable for entering the castle with card
+    Attacked = true;
+    HasKeySmall = false;    //Variable for key for small gate
+    HasKeyBig = false;      //Variable for key for chest
+    HasFlashLight = false; // Variable for Flashlight for Forest
+    HasCard = false;       //Variable for entering the castle with card
     y = 100;               //Horizontal background coördinates
     x = 100;               //Vertical background coördinates
     LevelX = 1;            //Horizontal Level
     LevelY = 1;            //Vertical Level
     D = 0;                 //Variable for Animation
     Skin = "char";         //Player Skin
-    Speed = 50;            //WalkSpeed
+    Speed = 10;            //WalkSpeed
     BossBattle = false;
-    WalkingAllowed = true;
+    WalkingAllowed = false;
     WalkingBlock = true;
     XC = 200;
     YC = 430;
@@ -298,9 +299,7 @@ function Level11() {
 }
 
 function Level21() {
-    ButtonBLOCKUP.disabled = false;
     //Middle level
-    ButtonBLOCKUP.setAttribute("style", "display: block;"); //Disables going up
     //Checks for keycard
     if (HasCard == true) {
         //If you have the keycard, Remove the block
@@ -308,6 +307,8 @@ function Level21() {
         ButtonBLOCKUP.disabled = true;
     }
     else {
+        ButtonBLOCKUP.disabled = false;
+        ButtonBLOCKUP.setAttribute("style", "display: block;"); //Disables going up
         ButtonBLOCKUP.onclick = function () {
             //If not, alert the player in a popup when the block is clicked
             alert("You'll need a keycard to get through here.");
@@ -319,10 +320,8 @@ function Level21() {
 
 function Level31() {
     //searching forest
-    ButtonMiddle.disabled = false;
-    ButtonMiddle.innerHTML = 'Search Forest?';
-    ButtonBLOCKUP.disabled = false;
-    ButtonBLOCKUP.setAttribute("style", "display: block;");
+
+
     if (HasFlashLight == true) {
         ButtonMiddle.onclick = function () {
             HasKeySmall = true;
@@ -334,8 +333,10 @@ function Level31() {
         }
     }
     else {
+
         ButtonMiddle.onclick = function () {
             alert("You'll need a FlashLight to search the forest.")
+
         }
     }
     //Going up
@@ -344,6 +345,10 @@ function Level31() {
         ButtonBLOCKUP.disabled = true;
     }
     else {
+        ButtonMiddle.disabled = false;
+        ButtonMiddle.innerHTML = 'Search Forest?';
+        ButtonBLOCKUP.disabled = false;
+        ButtonBLOCKUP.setAttribute("style", "display: block;");
         ButtonBLOCKUP.onclick = function () {
             alert("You'll need a Small key to get through here.")
         }
@@ -353,8 +358,12 @@ function Level31() {
 }
 
 function Level12() {
-    ButtonMiddle.disabled = false;
-    ButtonMiddle.innerHTML = 'Search Shed?';
+    if (HasFlashLight == false) {
+        ButtonMiddle.disabled = false;
+        ButtonMiddle.innerHTML = 'Search Shed?';
+    }
+
+
     ButtonMiddle.onclick = function () {
         alert("Recieved Flashlight!");
         ButtonMiddle.disabled = true;
@@ -367,8 +376,10 @@ function Level22() {
 }
 
 function Level32() {
-    ButtonMiddle.disabled = false;
-    ButtonMiddle.innerHTML = 'Search Tower?';
+    if (HasCard == false) {
+        ButtonMiddle.disabled = false;
+        ButtonMiddle.innerHTML = 'Search Tower?';
+    }
     ButtonMiddle.onclick = function () {
         alert("Recieved keycard!");
         HasCard = true;
@@ -384,7 +395,7 @@ function Level13() {
             alert("You picked up armor.");
             Skin = "charArmor";
             Character.src = "img/Char/" + Skin + ".png";
-
+            document.body.style.backgroundImage = "url('img/MapOpenChest.png')";
         }
         else {
             alert("You will need a key to open this chest.");
@@ -404,10 +415,13 @@ function Level23() {
 }
 
 function Level33() {
-    document.getElementById("KEY").setAttribute("style", "display: block;");
+    if (HasKeyBig == false) {
+        document.getElementById("KEY").setAttribute("style", "display: block;");
+    }
     document.getElementById("KEY").onclick = function () {
         HasKeyBig = true;
         alert("You picked up a treasure key.");
+        document.body.style.backgroundImage = "url('img/MapNoKey.png')";
     }
 
 }

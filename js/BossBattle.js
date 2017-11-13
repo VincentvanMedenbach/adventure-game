@@ -13,6 +13,8 @@ var PositionChar = "left:" + XC + "px;top:" + YC + "px;" + "width: 300px;";
 var Direction = "left";
 
 function StartBossBattle() {
+    WalkingAllowed = true;
+    Attacked = false;
     console.log("You have encountered a dragon");
     document.body.style.backgroundImage = "url('img/BossBattleBG.png')";    //Sets correct background
     document.body.style.backgroundSize = "100%";                        //Sets correct background scale
@@ -33,22 +35,28 @@ function StartBossBattle() {
     window.onkeydown = function (KEY) {
         var KEYCODE = KEY.keyCode;
         KEY.preventDefault();
-        if (KEYCODE === 37) {
+        if (KEYCODE === 37 && WalkingAllowed == true) {
             Keysleft = true;
+            walking();
         }
-        else if (KEYCODE === 38) {
+        else if (KEYCODE === 38 && WalkingAllowed == true) {
             Keysup = true;
+            walking();
         }
-        else if (KEYCODE === 39) {
+        else if (KEYCODE === 39 && WalkingAllowed == true) {
             Keysright = true;
+            walking();
         }
-        else if (KEYCODE === 40) {
+        else if (KEYCODE === 40 && WalkingAllowed == true) {
             Keysdown = true;
+            walking();
         }
-        else if (KEYCODE === 32 && XC > 550) {
+        else if (KEYCODE === 32 && XC > 550 && WalkingAllowed == true && Attacked == false) {
+            Attacked == true;
             DraakATTACK();
+            walking();
         }
-        walking();
+
     };   //Keypress listener
 
 
@@ -97,13 +105,13 @@ function StartBossBattle() {
 
 
     function MovingCHAR() {
-        while (YC > 450) {
+        while (YC > 450 && WalkingAllowed == true) {
             YC--;
         }
-        while (YC < 215) {
+        while (YC < 215 && WalkingAllowed == true) {
             YC++;
         }
-        while (XC < -20) {
+        while (XC < -20 && WalkingAllowed == true) {
             XC++;
         }
         while (XC > 580 && WalkingBlock == true) {
@@ -117,13 +125,15 @@ function StartBossBattle() {
             Character.src = "img/Char/" + Skin + Direction + "1.png";
             console.log('1 werkt');
         }
-        else if ( D > 10) {
+        else if ( D > 10 && WalkingAllowed == true) {
             D = 0;
         }
-        if (XC > 1230){
+        if (XC > 1230 && WalkingAllowed == true){
             XC = 200;
             YC = 430;
             document.body.style.backgroundImage = "url('img/Final.png')";
+            StartButton.innerHTML = "You Won!";
+            StartButton.setAttribute("style", "display: block; top: 20%;");
 
         }
         var PositionChar = "left:" + XC + "px;top:" + YC + "px;" + "width: 300px;";
@@ -133,7 +143,7 @@ function StartBossBattle() {
 
     function DraakATTACK() {
         console.log(Skin);
-        if (Skin == "CharArmor" && Attacked == false) {
+        if (Skin == "charArmor" && Attacked == false) {
             WalkingAllowed = false;
             Attacked = true;
             SwordAttack();
@@ -160,10 +170,10 @@ function SwordAttack(){
 
     function Attacking() {
         if (a == 51){
-            Draak.src = "";
-            Draak.alt = "";
+            Draak.setAttribute("style","display: none;");
             WalkingAllowed = true;
             WalkingBlock = false;
+            a = 52;
         }
         else if (a == 50) {
             a++;
