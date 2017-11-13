@@ -128,7 +128,6 @@ function Moving() {
     }
     //makes Character visible
     else {
-        console.log("visible");
         Character.setAttribute("style", "display: block;");
         //Makes Character Bigger when in castle
         if (y < 9 || BossBattle == true) {
@@ -191,11 +190,10 @@ function moved() {
         Character.style.top = "550px";
         // outside
     }
-    console.log(x + "+" + y);           //logs level
+    console.log(LevelXY);           //logs level
     eval('' + LevelXY + '()');          //Runs correct function
     document.getElementById('level_title').innerHTML = LevelXY;    //sets Topleft TXT
     Character.src = "img/Char/" + Skin + ".png";  //sets correct skin
-    console.log("Animation finished");  //notifies console of animation beind finished
     D = 0;                              //resets animation
 }
 
