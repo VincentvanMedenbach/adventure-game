@@ -4,7 +4,7 @@ var HasKeySmall = false;    //Variable for key for small gate
 var HasKeyBig = false;      //Variable for key for chest
 var HasFlashLight = false; // Variable for Flashlight for Forest
 var HasCard = false;       //Variable for entering the castle with card
-var bugtest = true;       //Bugtesting mode
+var bugtest = false;       //Bugtesting mode
 var y = 100;               //Horizontal background coördinates
 var x = 100;               //Vertical background coördinates
 var LevelX = 1;            //Horizontal Level
@@ -50,7 +50,6 @@ function Start() {
     HasKeyBig == false;      //Variable for key for chest
     HasFlashLight == false; // Variable for Flashlight for Forest
     HasCard == false;       //Variable for entering the castle with card
-    bugtest == true;       //Bugtesting mode
     y = 100;               //Horizontal background coördinates
     x = 100;               //Vertical background coördinates
     LevelX = 1;            //Horizontal Level
@@ -59,6 +58,11 @@ function Start() {
     Skin = "char";         //Player Skin
     Speed = 50;            //WalkSpeed
     BossBattle = false;
+    WalkingAllowed = true;
+    WalkingBlock = true;
+    XC = 200;
+    YC = 430;
+
     if (bugtest == true) {       //Development
         Bugtest();
     }
@@ -296,17 +300,20 @@ function Level11() {
 }
 
 function Level21() {
+    ButtonBLOCKUP.disabled = false;
     //Middle level
     ButtonBLOCKUP.setAttribute("style", "display: block;"); //Disables going up
     //Checks for keycard
     if (HasCard == true) {
         //If you have the keycard, Remove the block
         ButtonBLOCKUP.setAttribute("style", "display: none;");
+        ButtonBLOCKUP.disabled = true;
     }
     else {
         ButtonBLOCKUP.onclick = function () {
             //If not, alert the player in a popup when the block is clicked
-            alert("You'll need a keycard to get through here.")
+            alert("You'll need a keycard to get through here.");
+
         }
     }
 
@@ -325,6 +332,7 @@ function Level31() {
             alert("Recieved SmallKey");
             ButtonBLOCKUP.disabled = true;
             ButtonBLOCKUP.setAttribute("style", "display: none;");
+            ButtonMiddle.disabled = true;
         }
     }
     else {
@@ -351,6 +359,7 @@ function Level12() {
     ButtonMiddle.innerHTML = 'Search Shed?';
     ButtonMiddle.onclick = function () {
         alert("Recieved Flashlight!");
+        ButtonMiddle.disabled = true;
         HasFlashLight = true;
     };
 
@@ -359,12 +368,13 @@ function Level12() {
 function Level22() {
 }
 
- function Level32() {
+function Level32() {
     ButtonMiddle.disabled = false;
     ButtonMiddle.innerHTML = 'Search Tower?';
     ButtonMiddle.onclick = function () {
         alert("Recieved keycard!");
         HasCard = true;
+        ButtonMiddle.disabled = true;
     };
 }
 
@@ -372,9 +382,9 @@ function Level13() {
     document.getElementById("CHEST").setAttribute("style", "display: block;");
 
     document.getElementById("CHEST").onclick = function () {
-        if (HasKeyBig = true) {
-            alert("You picked up a gold armor.");
-            Skin = "CharArmor";
+        if (HasKeyBig == true) {
+            alert("You picked up armor.");
+            Skin = "charArmor";
             Character.src = "img/Char/" + Skin + ".png";
 
         }

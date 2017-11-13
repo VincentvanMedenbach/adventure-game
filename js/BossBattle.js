@@ -10,6 +10,7 @@ var WalkingBlock = true;
 var XC = 200;
 var YC = 430;
 var PositionChar = "left:" + XC + "px;top:" + YC + "px;" + "width: 300px;";
+var Direction = "left";
 
 function StartBossBattle() {
     console.log("You have encountered a dragon");
@@ -80,11 +81,13 @@ function StartBossBattle() {
             if (Keysleft && WalkingAllowed == true) {
                 XC -= movement;
                 console.log("KEYLEFTPRESSED");
+                Direction = "right";
                 D++;
             }
             if (Keysright && WalkingAllowed == true) {
                 XC += movement;
                 D++;
+                Direction = "left";
                 console.log("KEYRightPRESSED");
             }
             MovingCHAR();
@@ -106,13 +109,22 @@ function StartBossBattle() {
         while (XC > 580 && WalkingBlock == true) {
             XC--;
         }
-        if (D > 7 && WalkingAllowed == true) {
-            Character.src = "img/Char/" + Skin + "2.png";
-
+        if (D == 1 && WalkingAllowed == true) {
+            Character.src = "img/Char/" + Skin + Direction + "2.png";
+            console.log('2 werkt');
         }
-        if (D > 15 && WalkingAllowed == true) {
-            Character.src = "img/Char/" + Skin + "1.png";
+        else if (D > 5 && WalkingAllowed == true && D < 10) {
+            Character.src = "img/Char/" + Skin + Direction + "1.png";
+            console.log('1 werkt');
+        }
+        else if ( D > 10) {
             D = 0;
+        }
+        if (XC > 1230){
+            XC = 200;
+            YC = 430;
+            document.body.style.backgroundImage = "url('img/Final.png')";
+
         }
         var PositionChar = "left:" + XC + "px;top:" + YC + "px;" + "width: 300px;";
         Character.setAttribute("style", PositionChar);
@@ -132,7 +144,7 @@ function StartBossBattle() {
         }
         else {
             WalkingAllowed = false;
-            Character.src = "img/Char" + Skin + "Dead.png";
+            Character.src = "img/Char/CharDead.png";
             Draak.src = "img/Dragon1.png";
             StartButton.innerHTML = "You lost.";
             StartButton.setAttribute("style", "display: block; top: 20%;");
