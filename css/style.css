@@ -34,7 +34,7 @@ button {
 #ButtonStart {
     font-size: 60px;
     position: absolute;
-    left: 38%;
+    left: 560px;
     top: 36%;
     background-color: yellow;
     border-color: red;
@@ -57,14 +57,14 @@ button {
 #ButtonUp {
     position: absolute;
     top: 0px;
-    left: 50%;
+    left: 760px;
     vertical-align: middle;
 }
 
 #ButtonBLOCKUP {
     position: absolute;
     top: 0px;
-    left: 50%;
+    left: 760px;
     vertical-align: middle;
     color: yellow;
     z-index: 20;
@@ -85,14 +85,14 @@ button[disabled] {
 #Char {
     position: absolute;
     top: 550px;
-    left: 50%;
+    left: 760px;
     vertical-align: middle;
     z-index: 4;
 
 }
 
 #ButtonMiddle {
-    position: absolute;
+    position: fixed;
     top: 40%;
     left: 40%;
     font-size: 50px;
