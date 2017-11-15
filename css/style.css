@@ -9,9 +9,20 @@ body {
     background-width: 1500px;
     background-size: 100%;
     background-repeat: no-repeat;
-
     height: 717px;
     width: 1500px;
+}
+
+@media screen and (orientation: landscape) {
+
+    #container {
+        -ms-transform: rotate(-90deg); /* IE 9 */
+        -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
+        transform: rotate(-90deg);
+        width: /* screen width */;
+        height: /* screen height */;
+        overflow: scroll;
+    }
 }
 
 #level_title {
@@ -33,7 +44,8 @@ button {
     background-color: transparent;
     border-color: transparent;
 }
-button:not(#ButtonStart):not(#ButtonMiddle):not([disabled]){
+
+button:not(#ButtonStart):not(#ButtonMiddle):not([disabled]) {
     color: Yellow;
 }
 
@@ -167,5 +179,6 @@ button {
 
 button:disabled,
 button[disabled] {
-    color: transparent; !important;
+    color: transparent;
+!important;
 }
