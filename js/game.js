@@ -13,6 +13,11 @@ var D = 0;                 //Variable for Animation
 var Skin = "char";         //Player Skin
 var Speed = 10;            //WalkSpeed
 var BossBattle = false;        //Disables BossBattle Stuff
+var CharacterPosition = 760;
+window.ondragstart = function () {
+    return false;
+};
+
 
 
 //Variables refering to HTML
@@ -63,7 +68,8 @@ function Start() {
     WalkingBlock = true;
     XC = 200;
     YC = 430;
-
+    CharacterPosition = 760;
+    Final = false;
     if (bugtest == true) {       //Development
         Bugtest();
     }
@@ -87,6 +93,7 @@ function Start() {
     ButtonDown.style.fontSize = '200px';
     ButtonLeft.style.fontSize = '200px';
     ButtonStart.style.fontSize = "0";
+    CrownButton.setAttribute("style", "display: none");
 
 
 }
@@ -159,7 +166,7 @@ function moved() {
         ButtonRight.disabled = false;
     }
     //left
-    if (LevelX == 3 || LevelY == 2) {
+    if (LevelX == 3 && LevelY != 1 || LevelY == 2 || LevelXY == "Level31" && HasKeySmall == true) {
 
         ButtonLeft.disabled = true;
     }
@@ -179,6 +186,13 @@ function moved() {
     }
     else {
         ButtonUP.disabled = false;
+    }
+    if (LevelX == 3 && LevelY == 1) {
+        ButtonLeft.setAttribute("onClick", "MoveToForest();");
+        console.log("ACTIVE!");
+    }
+    else {
+        ButtonLeft.setAttribute("onClick", "MoveLeft();");
     }
     //Sets width of character
     if (y < 9) {
@@ -209,7 +223,6 @@ function MoveLeft() {
         //Final movement
         if (a == 51) {
             a++;    //Adds to loop
-
             LevelX++; //Changes LVL
             moved();  //Sets everything back to how it should be
         }
@@ -295,6 +308,87 @@ function MoveUP() {
     }
 }
 
+function MoveToForest() {
+    ButtonRight.disabled = true;
+    ButtonUP.disabled = true;
+    ButtonDown.disabled = true;
+    ButtonLeft.disabled = true;
+    ButtonBLOCKUP.setAttribute("style", "display: none;");
+    ButtonBLOCKUP.disabled = true;
+    ButtonMiddle.disabled = true;
+
+    var a = 0;                               //Resets timer
+    window.setInterval(movement, Speed);        //Sets correct speed to move at
+    console.log("now moving left");          //Tells console which way moving
+
+    //Movement loop
+    function movement() {
+        //Final movement
+        if (a == 65) {
+            console.log("did werkt");
+            a++;    //Adds to loop
+            CharacterPosition -= 10;
+            Character.setAttribute("style", "left:" + CharacterPosition + "px;");
+            Forest();
+            ButtonLeft.disabled = true;
+        }
+        //moving
+        else if (a < 65) {
+            console.log("did werkt");
+            CharacterPosition -= 10;
+            Character.setAttribute("style", "left:" + CharacterPosition + "px;");
+            a++;        //Adds to loop counter
+            D++;    //Executes animation
+        }
+    }
+}
+
+function MoveFromForest() {
+    var a = 0;                               //Resets timer
+    window.setInterval(movement, Speed);        //Sets correct speed to move at
+    console.log("now moving left");          //Tells console which way moving
+
+    //Movement loop
+    function movement() {
+        //Final movement
+        if (a == 65) {
+
+            console.log("did werkt");
+            a++;    //Adds to loop
+            CharacterPosition += 10;
+            Character.setAttribute("style", "left:" + CharacterPosition + "px;");
+            ButtonRight.setAttribute("onClick", "MoveRight();");
+            moved();
+        }
+        //moving
+        else if (a < 65) {
+            Level31();
+            console.log("did werkt");
+            CharacterPosition += 10;
+            Character.setAttribute("style", "left:" + CharacterPosition + "px;");
+            a++;        //Adds to loop counter
+            D++;    //Executes animation
+        }
+    }
+}
+
+function Forest() {
+    ButtonRight.disabled = true;
+    document.getElementById('level_title').innerHTML = "FOREST";
+    if (HasFlashLight == true) {
+        HasKeySmall = true;
+        console.log(HasKeySmall);
+        alert("Recieved SmallKey");
+        MoveFromForest();
+    }
+    else {
+        StartButton.innerHTML = "You Died!";
+        StartButton.setAttribute("style", "display: block; top: 20%;");
+        Character.src = "img/char/charDead.png";
+    }
+
+}
+
 function Level11() {
 }
 
@@ -321,32 +415,13 @@ function Level21() {
 function Level31() {
     //searching forest
 
-
-    if (HasFlashLight == true) {
-        ButtonMiddle.onclick = function () {
-            HasKeySmall = true;
-            console.log(HasKeySmall);
-            alert("Recieved SmallKey");
-            ButtonBLOCKUP.disabled = true;
-            ButtonBLOCKUP.setAttribute("style", "display: none;");
-            ButtonMiddle.disabled = true;
-        }
-    }
-    else {
-
-        ButtonMiddle.onclick = function () {
-            alert("You'll need a FlashLight to search the forest.")
-
-        }
-    }
-    //Going up
+    // Going
+    // up
     if (HasKeySmall == true) {
         ButtonBLOCKUP.setAttribute("style", "display: none;");
         ButtonBLOCKUP.disabled = true;
     }
     else {
-        ButtonMiddle.disabled = false;
-        ButtonMiddle.innerHTML = 'Search Forest?';
         ButtonBLOCKUP.disabled = false;
         ButtonBLOCKUP.setAttribute("style", "display: block;");
         ButtonBLOCKUP.onclick = function () {
@@ -362,7 +437,6 @@ function Level12() {
         ButtonMiddle.disabled = false;
         ButtonMiddle.innerHTML = 'Search Shed?';
     }
-
 
     ButtonMiddle.onclick = function () {
         alert("Recieved Flashlight!");
@@ -388,7 +462,12 @@ function Level32() {
 }
 
 function Level13() {
-    document.getElementById("CHEST").setAttribute("style", "display: block;");
+    if (Skin == "charArmor") {
+        document.getElementById("CHEST").setAttribute("style", "display: none;");
+    }
+    else {
+        document.getElementById("CHEST").setAttribute("style", "display: block;");
+    }
 
     document.getElementById("CHEST").onclick = function () {
         if (HasKeyBig == true) {
@@ -396,6 +475,7 @@ function Level13() {
             Skin = "charArmor";
             Character.src = "img/Char/" + Skin + ".png";
             document.body.style.backgroundImage = "url('img/MapOpenChest.png')";
+            document.getElementById("CHEST").setAttribute("style", "display: none;");
         }
         else {
             alert("You will need a key to open this chest.");
@@ -418,8 +498,12 @@ function Level33() {
     if (HasKeyBig == false) {
         document.getElementById("KEY").setAttribute("style", "display: block;");
     }
+    else {
+        document.getElementById("KEY").setAttribute("style", "display: none;");
+    }
     document.getElementById("KEY").onclick = function () {
         HasKeyBig = true;
+        document.getElementById("KEY").setAttribute("style", "display: none;");
         alert("You picked up a treasure key.");
         document.body.style.backgroundImage = "url('img/MapNoKey.png')";
     }

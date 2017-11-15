@@ -11,6 +11,9 @@ var XC = 200;
 var YC = 430;
 var PositionChar = "left:" + XC + "px;top:" + YC + "px;" + "width: 300px;";
 var Direction = "left";
+var FinalVAR = false;
+var CrownButton = document.getElementById("Crown");
+var Crown = false;
 
 function StartBossBattle() {
     WalkingAllowed = true;
@@ -128,13 +131,8 @@ function StartBossBattle() {
         else if ( D > 10 && WalkingAllowed == true) {
             D = 0;
         }
-        if (XC > 1230 && WalkingAllowed == true){
-            XC = 200;
-            YC = 430;
-            document.body.style.backgroundImage = "url('img/Final.png')";
-            StartButton.innerHTML = "You Won!";
-            StartButton.setAttribute("style", "display: block; top: 20%;");
-
+        if (XC > 1230 && WalkingAllowed == true && FinalVAR == false){
+            FinalFunct();
         }
         var PositionChar = "left:" + XC + "px;top:" + YC + "px;" + "width: 300px;";
         Character.setAttribute("style", PositionChar);
@@ -150,7 +148,6 @@ function StartBossBattle() {
             Character.src = "img/Sword/Animation1.png";
             console.log("You won.");
 
-
         }
         else {
             WalkingAllowed = false;
@@ -161,6 +158,20 @@ function StartBossBattle() {
         }
     }
 
+}
+function FinalFunct(){
+    XC = 200;
+    YC = 430;
+    FinalVAR == true;
+    document.body.style.backgroundImage = "url('img/Final.png')";
+    StartButton.innerHTML = "You Won!";
+    StartButton.setAttribute("style", "display: block; top: 20%;");
+    CrownButton.setAttribute("style", "display: block");
+
+}
+function CrownFunct(){
+    Crown = true;
+    document.body.style.backgroundImage = "url('img/FinalNoCrown.png')";
 }
 
 function SwordAttack(){
