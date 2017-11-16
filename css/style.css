@@ -13,18 +13,6 @@ body {
     width: 1500px;
 }
 
-@media screen and (orientation: landscape) {
-
-    #container {
-        -ms-transform: rotate(-90deg); /* IE 9 */
-        -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
-        transform: rotate(-90deg);
-        width: /* screen width */;
-        height: /* screen height */;
-        overflow: scroll;
-    }
-}
-
 #level_title {
     display: inline;
     font-size: 18px;
@@ -181,4 +169,57 @@ button:disabled,
 button[disabled] {
     color: transparent;
 !important;
+}
+
+@media screen and (orientation: portrait) {
+
+    body {
+        width: 1400px;
+        height: 800px;
+        /*-ms-transform: rotate(+90deg); !* IE 9 *!*/
+        /*-webkit-transform: rotate(+90deg); !* Chrome, Safari, Opera *!*/
+        /*transform: rotate(+90deg);*/
+        /*width: 717px;*/
+        /*height: 1500px;*/
+    }
+
+    #ButtonUp #ButtonBLOCKUP {
+        left: 600px;
+    }
+
+    #ButtonStart {
+        top: 200px;
+        left: 600px;
+        font-size: 40px;
+    }
+
+    #ButtonRight {
+        left: 1200px;
+        top: 400px;
+    }
+
+    #ButtonMiddle {
+        top: 400px;
+    }
+
+    #KEY {
+        top: 40%;
+    }
+
+    #Draak {
+        left: 400px;
+        top: 0%;
+    }
+}
+
+@media screen and (orientation: landscape) {
+    #ButtonRight {
+        left: 1200px;
+    }
+
+    #Draak {
+        left: 400px;
+        top: 0%;
+    }
+
 }
