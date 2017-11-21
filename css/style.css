@@ -68,14 +68,7 @@ button:not(#ButtonStart):not(#ButtonMiddle):not([disabled]) {
     vertical-align: middle;
 }
 
-#ButtonBLOCKUP {
-    position: absolute;
-    top: 0px;
-    left: 760px;
-    vertical-align: middle;
-    color: red;
-    z-index: 20;
-}
+
 
 #ButtonDown {
     position: absolute;
@@ -185,6 +178,7 @@ button[disabled] {
 
     #ButtonUp #ButtonBLOCKUP {
         left: 600px;
+        z-index: 800;
     }
 
     #ButtonStart {
@@ -222,4 +216,12 @@ button[disabled] {
         top: 0%;
     }
 
+}
+#ButtonBLOCKUP {
+    position: absolute;
+    top: 0px;
+    left: 760px;
+    vertical-align: middle;
+    color: red!important;
+    z-index: 20;
 }

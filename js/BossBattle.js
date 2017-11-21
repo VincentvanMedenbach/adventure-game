@@ -108,7 +108,7 @@ function StartBossBattle() {
 
 
     function MovingCHAR() {
-        while (YC > 450 && WalkingAllowed == true) {
+        while (YC > 430 && WalkingAllowed == true) {
             YC--;
         }
         while (YC < 215 && WalkingAllowed == true) {
