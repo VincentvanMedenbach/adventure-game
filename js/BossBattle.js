@@ -158,47 +158,48 @@ function StartBossBattle() {
         }
     }
 
+}
 
-    function FinalFunct() {
-        XC = 200;
-        YC = 430;
-        FinalVAR == true;
-        document.body.style.backgroundImage = "url('img/Final.png')";
-        StartButton.innerHTML = "You Won!";
-        StartButton.setAttribute("style", "display: block; top: 20%;");
-        CrownButton.setAttribute("style", "display: block");
+function FinalFunct() {
+    XC = 200;
+    YC = 430;
+    FinalVAR == true;
+    document.body.style.backgroundImage = "url('img/Final.png')";
+    StartButton.innerHTML = "You Won!";
+    StartButton.setAttribute("style", "display: block; top: 20%;");
+    CrownButton.setAttribute("style", "display: block");
 
-    }
+}
 
-    function CrownFunct() {
-        Crown = true;
-        document.body.style.backgroundImage = "url('img/FinalNoCrown.png')";
-    }
+function CrownFunct() {
+    Crown = true;
+    document.body.style.backgroundImage = "url('img/FinalNoCrown.png')";
+}
 
-    function SwordAttack() {
-        var a = 0;
-        window.setInterval(Attacking, 20);
-        console.log("Now attacking Dragon!");
+function SwordAttack() {
+    var a = 0;
+    window.setInterval(Attacking, 20);
+    console.log("Now attacking Dragon!");
 
-        function Attacking() {
-            if (a == 51) {
-                Draak.setAttribute("style", "display: none;");
-                WalkingAllowed = true;
-                WalkingBlock = false;
-                a = 52;
-            }
-            else if (a == 50) {
-                a++;
-                Character.src = "img/Sword/Animation3.png";
-            }
-            else if (a < 20) {
-                a++;
-                Character.src = "img/Sword/Animation1.png";
-            }
-            else if (a > 19 && a < 50) {
-                a++;
-                Character.src = "img/Sword/Animation2.png";
-            }
-
+    function Attacking() {
+        if (a == 51) {
+            Draak.setAttribute("style", "display: none;");
+            WalkingAllowed = true;
+            WalkingBlock = false;
+            a = 52;
         }
+        else if (a == 50) {
+            a++;
+            Character.src = "img/Sword/Animation3.png";
+        }
+        else if (a < 20) {
+            a++;
+            Character.src = "img/Sword/Animation1.png";
+        }
+        else if (a > 19 && a < 50) {
+            a++;
+            Character.src = "img/Sword/Animation2.png";
+        }
+
     }
+}
