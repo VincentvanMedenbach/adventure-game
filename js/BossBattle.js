@@ -128,10 +128,10 @@ function StartBossBattle() {
             Character.src = "img/Char/" + Skin + Direction + "1.png";
             console.log('1 werkt');
         }
-        else if ( D > 10 && WalkingAllowed == true) {
+        else if (D > 10 && WalkingAllowed == true) {
             D = 0;
         }
-        if (XC > 1230 && WalkingAllowed == true && FinalVAR == false){
+        if (XC > 1230 && WalkingAllowed == true && FinalVAR == false) {
             FinalFunct();
         }
         var PositionChar = "left:" + XC + "px;top:" + YC + "px;" + "width: 300px;";
@@ -158,46 +158,47 @@ function StartBossBattle() {
         }
     }
 
-}
-function FinalFunct(){
-    XC = 200;
-    YC = 430;
-    FinalVAR == true;
-    document.body.style.backgroundImage = "url('img/Final.png')";
-    StartButton.innerHTML = "You Won!";
-    StartButton.setAttribute("style", "display: block; top: 20%;");
-    CrownButton.setAttribute("style", "display: block");
 
-}
-function CrownFunct(){
-    Crown = true;
-    document.body.style.backgroundImage = "url('img/FinalNoCrown.png')";
-}
-
-function SwordAttack(){
-    var a = 0;
-    window.setInterval(Attacking, 20);
-    console.log("Now attacking Dragon!");
-
-    function Attacking() {
-        if (a == 51){
-            Draak.setAttribute("style","display: none;");
-            WalkingAllowed = true;
-            WalkingBlock = false;
-            a = 52;
-        }
-        else if (a == 50) {
-            a++;
-            Character.src = "img/Sword/Animation3.png";
-        }
-        else if (a < 20) {
-            a++;
-            Character.src = "img/Sword/Animation1.png";
-        }
-        else if (a > 19 && a < 50){
-            a++;
-            Character.src = "img/Sword/Animation2.png";
-        }
+    function FinalFunct() {
+        XC = 200;
+        YC = 430;
+        FinalVAR == true;
+        document.body.style.backgroundImage = "url('img/Final.png')";
+        StartButton.innerHTML = "You Won!";
+        StartButton.setAttribute("style", "display: block; top: 20%;");
+        CrownButton.setAttribute("style", "display: block");
 
     }
-}
+
+    function CrownFunct() {
+        Crown = true;
+        document.body.style.backgroundImage = "url('img/FinalNoCrown.png')";
+    }
+
+    function SwordAttack() {
+        var a = 0;
+        window.setInterval(Attacking, 20);
+        console.log("Now attacking Dragon!");
+
+        function Attacking() {
+            if (a == 51) {
+                Draak.setAttribute("style", "display: none;");
+                WalkingAllowed = true;
+                WalkingBlock = false;
+                a = 52;
+            }
+            else if (a == 50) {
+                a++;
+                Character.src = "img/Sword/Animation3.png";
+            }
+            else if (a < 20) {
+                a++;
+                Character.src = "img/Sword/Animation1.png";
+            }
+            else if (a > 19 && a < 50) {
+                a++;
+                Character.src = "img/Sword/Animation2.png";
+            }
+
+        }
+    }
